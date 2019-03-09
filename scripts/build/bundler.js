@@ -122,7 +122,7 @@ function getRollupConfig(bundle) {
     commonjs(bundle.commonjs || {}),
     bundle.target === "universal" && nodeGlobals(),
     babelConfig && babel(babelConfig),
-    bundle.type === "plugin" && uglify()
+    uglify()
   ].filter(Boolean);
 
   if (bundle.target === "node") {
@@ -140,7 +140,7 @@ function getRollupOutputOptions(bundle) {
   if (bundle.target === "node") {
     options.format = "cjs";
   } else if (bundle.target === "universal") {
-    options.format = "umd";
+    options.format = "es";
     options.moduleName =
       bundle.type === "plugin" ? `prettierPlugins.${bundle.name}` : bundle.name;
   }
